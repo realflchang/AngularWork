@@ -1,0 +1,46 @@
+  <!doctype html>
+    <html ng-app="showProductsApp">
+      <head>
+        <meta charset="utf-8">
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>-->
+        <script src="js/angular.min.js"></script>
+        <script type="text/javascript">
+
+			var App = angular.module('showProductsApp', []);
+
+			App.controller('ProductsCtrl', ['$scope', '$http', '$filter', function(scope, http, filter){
+			  scope.products = [];
+			  http.get('products.json').success(function(data) {
+			    scope.products = data.products; // retrieve all JSON data
+
+			  });
+			}]);
+
+
+        </script>
+      </head>
+      <body>
+        <div ng-controller="ProductsCtrl">
+          <label>Name:</label>
+          <input type="text" ng-model="yourName" placeholder="Enter a name here">
+          <hr>
+          <h1>Hello 1 {{yourName}}! </h1>
+
+          <table border="1">
+            <tr ng-repeat="item in products | filter:yourName">
+              <td>{{item}}</td>
+              <td>
+                <ul>
+                  <li ng-repeat="c in item">
+                  {{c.name}} -
+                  {{c.avail}}
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+
+        </div>
+      </body>
+    </html>
+
