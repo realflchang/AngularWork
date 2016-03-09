@@ -1,0 +1,15 @@
+      body > div { 
+        width: 100%;
+      }
+      
+      div.main {
+        width:200px;margin:0 auto;position:relative;
+      }
+      
+      div#searchTip {
+      	display:none;position:absolute;z-index:1;height:auto;background:#CCC;font-size:10pt;left:0;max-width:200px;
+      }
+      
+      div#searchTip table td {
+      	border:1px solid #000;
+      }

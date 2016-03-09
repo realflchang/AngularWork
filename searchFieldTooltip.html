@@ -1,0 +1,113 @@
+  <!doctype html>
+    <html ng-app="showProductsApp">
+      <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="css/searchFieldTooltip.css">
+
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>-->
+
+        <script src="js/angular.min.js"></script>
+        <script type="text/javascript">
+
+			var App = angular.module('showProductsApp', []);
+
+			App.controller('ProductsCtrl', ['$scope', '$http', '$filter', function(scope, http, filter){
+			  scope.products = [];
+			  http.get('products-nocosts.json').success(function(data) {
+			    scope.products = data.products; // retrieve all JSON data
+
+			    // Method to toggle search field results tooltip. b can be true or false
+			    scope.showTip = function(b) {
+			      if (b) {
+			        if (scope.searchField !== "" && scope.searchField !== undefined) {
+			          document.getElementById('searchTip').style.display = "block";
+			        }
+			        else {
+			          document.getElementById('searchTip').style.display = "none";
+			        }
+			      }
+			      else {
+			          setTimeout(function() {
+			            document.getElementById('searchTip').style.display = "none";
+			          }, 2000
+			        );
+			      }
+			    };
+
+			  });
+			}]);
+
+
+        </script>
+      </head>
+      <body>
+        <div ng-controller="ProductsCtrl">
+          <div class="main">
+          <label>Search:</label>
+          <input type="text" ng-model="searchField" placeholder="Enter a search term here" ng-change="showTip(true)" ng-focus="showTip(true)" ng-blur="showTip(false)"><br>
+
+	          <div id="searchTip">
+		          <table border="0">
+		            <tr ng-repeat="item in products | filter:searchField">
+		              <td>
+		                  <span ng-repeat="c in item">
+		                  {{c.sku}} : {{c.name}} -
+		                  {{c.avail}}
+		                  </span>
+		              </td>
+		            </tr>
+		          </table>
+		  </div><!--End div.searchtip-->
+		  </input>
+	  </div><!--End div.main-->
+
+          <hr>
+          <h1>Search Term: {{searchField}} </h1>
+
+	  <div>Footer here</div>
+
+
+	  <pre>
+content 	  content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content
+
+	  </pre>
+
+	  <pre>
+content 	  content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content
+
+	  </pre>
+
+	  <pre>
+content 	  content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content
+
+	  </pre>
+
+	  <pre>
+content 	  content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content
+
+	  </pre>
+
+	  <pre>
+content 	  content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content
+
+	  </pre>
+
+	  <pre>
+content 	  content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content
+
+	  </pre>
+
+	  <pre>
+content 	  content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content
+
+	  </pre>
+
+	  <pre>
+content 	  content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content
+
+	  </pre>
+
+        </div><!--End div.global-->
+      </body>
+    </html>
+
